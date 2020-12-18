@@ -16,6 +16,7 @@ public class CodificacionHuffman {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        //Cambio descargado desde github
         
     }
     
