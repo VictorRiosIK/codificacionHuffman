@@ -23,5 +23,7 @@ public class Fichero {
     }
     public void obtenerFicheroALeer(){
         fileChooser.showOpenDialog(fileChooser);
+        String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+        System.out.println(""+ruta);
     }
 }
