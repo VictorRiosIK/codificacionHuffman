@@ -14,12 +14,25 @@ import java.io.File;
  */
 public class Lector {
     private Fichero fichero;
+    private String pathArchivoTxt;
+    private File archivo;
     public Lector(){
         this.fichero=new Fichero();
         
     }
     public void obtenerFichero(){
-        fichero.obtenerFicheroALeer();
+        this.fichero.obtenerFicheroALeer();
+        this.obtienePathArchivo();
+    }
+    
+    
+    private void obtienePathArchivo(){
+        this.pathArchivoTxt=fichero.getRuta();
+        this.archivo=new File(pathArchivoTxt);
+    }
+    
+    public String getPathArchivo(){
+        return this.pathArchivoTxt;
     }
     
     
