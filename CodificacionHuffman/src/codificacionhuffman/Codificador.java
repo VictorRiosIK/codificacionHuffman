@@ -20,5 +20,8 @@ public class Codificador {
            this.lectorArchivo=new Lector();
            this.compresor=new Compresor();
     }
+    public void calcularCodificacion(){
+        
+    }
     
 }

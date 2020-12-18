@@ -16,6 +16,7 @@ public class CodificacionHuffman {
      */
     public static void main(String[] args) {
         Codificador codificadorHoffman=new Codificador();
+        codificadorHoffman.calcularCodificacion();
         
         
     }

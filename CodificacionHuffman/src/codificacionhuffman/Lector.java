@@ -1,5 +1,7 @@
 package codificacionhuffman;
 
+import java.io.File;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,5 +16,8 @@ public class Lector {
     private Fichero fichero;
     public Lector(){
         this.fichero=new Fichero();
+        
     }
+    
+    
 }
