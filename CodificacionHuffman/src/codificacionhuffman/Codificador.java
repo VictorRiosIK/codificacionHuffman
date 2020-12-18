@@ -1,5 +1,7 @@
 package codificacionhuffman;
 
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,6 +23,9 @@ public class Codificador {
            this.compresor=new Compresor();
     }
     public void calcularCodificacion(){
+        JOptionPane.showMessageDialog(null,"BIENVENIDO AL COMPRESOR DE TEXTO MEDIANTE EL CODIGO DE HUFFMAN\n"
+                + "A continuación se le pedira que elija el archivo .txt a codificar");
+        lectorArchivo.obtenerFichero();
         
     }
     

@@ -18,6 +18,9 @@ public class Lector {
         this.fichero=new Fichero();
         
     }
+    public void obtenerFichero(){
+        fichero.obtenerFicheroALeer();
+    }
     
     
 }
