@@ -11,5 +11,8 @@ package codificacionhuffman;
  * @author HUGO
  */
 public class Escritor {
-    
+    private Fichero fichero;
+    public Escritor(){
+        this.fichero=new Fichero();
+    }
 }

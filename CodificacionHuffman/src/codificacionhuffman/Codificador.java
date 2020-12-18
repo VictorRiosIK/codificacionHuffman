@@ -11,5 +11,14 @@ package codificacionhuffman;
  * @author HUGO
  */
 public class Codificador {
+    private Escritor escritorArchivo;
+    private Lector lectorArchivo;
+    private Compresor compresor;
+    
+    public Codificador(){
+           this.escritorArchivo=new Escritor();
+           this.lectorArchivo=new Lector();
+           this.compresor=new Compresor();
+    }
     
 }
