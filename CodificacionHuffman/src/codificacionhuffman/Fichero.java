@@ -1,7 +1,9 @@
 package codificacionhuffman;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,8 +27,13 @@ public class Fichero {
     }
     public void obtenerFicheroALeer(){
         fileChooser.showOpenDialog(fileChooser);
-        String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+        try{
+            String ruta = fileChooser.getSelectedFile().getAbsolutePath();
         this.rutaArchivo=ruta;
+        }catch(Exception e){
+            int opcion=JOptionPane.showConfirmDialog(null,"No se ha seleccionado ningun archivo, ¿Desea seleccionar de nuevo un archivo?","Selecciona una opción",JOptionPane.YES_NO_CANCEL_OPTION);
+            
+        }
     }
     
     public String getRuta(){
