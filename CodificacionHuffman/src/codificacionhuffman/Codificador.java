@@ -23,7 +23,7 @@ public class Codificador {
            this.compresor=new Compresor();
     }
     public void calcularCodificacion(){
-        JOptionPane.showMessageDialog(null,"BIENVENIDO AL COMPRESOR DE TEXTO MEDIANTE EL CODIGO DE HUFFMAN\n"
+        JOptionPane.showMessageDialog(null,"\t\tBIENVENIDO AL COMPRESOR DE TEXTO MEDIANTE EL CODIGO DE HUFFMAN\n"
                 + "A continuación se le pedira que elija el archivo .txt a codificar");
         lectorArchivo.obtenerFichero();
         

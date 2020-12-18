@@ -26,14 +26,32 @@ public class Fichero {
         rutaArchivo="";
     }
     public void obtenerFicheroALeer(){
-        fileChooser.showOpenDialog(fileChooser);
-        try{
-            String ruta = fileChooser.getSelectedFile().getAbsolutePath();
-        this.rutaArchivo=ruta;
-        }catch(Exception e){
-            int opcion=JOptionPane.showConfirmDialog(null,"No se ha seleccionado ningun archivo, ¿Desea seleccionar de nuevo un archivo?","Selecciona una opción",JOptionPane.YES_NO_CANCEL_OPTION);
+        String respJOption="si";
+        
+        do{
             
-        }
+            try{
+                fileChooser.showOpenDialog(fileChooser);
+                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+                this.rutaArchivo=ruta;
+            }catch(Exception e){
+                int opcion=JOptionPane.showConfirmDialog(null,"No se ha seleccionado ningun archivo, ¿Desea seleccionar de nuevo un archivo?","Selecciona una opción",JOptionPane.YES_NO_CANCEL_OPTION);
+                System.out.println(""+opcion);
+                //Si=0
+                //No=1
+                //Cancelar=2
+                switch(opcion){
+                    case 0:
+                        respJOption="si";
+                        break;
+                    default:
+                        respJOption="no";
+                        JOptionPane.showMessageDialog(null,"\t\tHasta luego!");
+                        System.exit(0);
+                }
+            };
+        
+        }while(respJOption.equals("si"));
     }
     
     public String getRuta(){
