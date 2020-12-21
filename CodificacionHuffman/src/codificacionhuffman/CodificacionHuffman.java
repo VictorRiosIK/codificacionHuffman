@@ -17,7 +17,6 @@ public class CodificacionHuffman {
     public static void main(String[] args) {
         Codificador codificadorHoffman=new Codificador();
         codificadorHoffman.calcularCodificacion();
-        System.out.println("Hola para Git hub");
         
     }
     

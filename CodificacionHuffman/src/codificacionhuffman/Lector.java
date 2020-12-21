@@ -38,7 +38,7 @@ public class Lector {
         this.pathArchivoTxt=fichero.getRuta();
         this.archivo=new File(pathArchivoTxt);
     }
-    public void obtieneTexto(){
+    public String obtieneTexto(){
         try{
             this.fileReader=new FileReader(this.archivo);
             buffer=new BufferedReader(this.fileReader);
@@ -48,7 +48,7 @@ public class Lector {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Ocurrio un error leyendo el archivo");
         }
-        
+        return this.texto;
     }
     public String getPathArchivo(){
         return this.pathArchivoTxt;
