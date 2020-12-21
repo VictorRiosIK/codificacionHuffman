@@ -1,5 +1,6 @@
 package codificacionhuffman;
 
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /*
@@ -26,6 +27,8 @@ public class Codificador {
         JOptionPane.showMessageDialog(null,"\t\tBIENVENIDO AL COMPRESOR DE TEXTO MEDIANTE EL CODIGO DE HUFFMAN\n"
                 + "A continuación se le pedira que elija el archivo .txt a codificar");
         lectorArchivo.obtenerFichero();
+        lectorArchivo.obtieneTexto();
+        
         
     }
     

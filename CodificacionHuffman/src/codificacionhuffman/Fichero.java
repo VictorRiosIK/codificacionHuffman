@@ -1,7 +1,10 @@
 package codificacionhuffman;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -25,15 +28,20 @@ public class Fichero {
         directorio.mkdir();
         rutaArchivo="";
     }
-    public void obtenerFicheroALeer(){
-        String respJOption="si";
+    public void obtenerFicheroALeer() {
+        String respJOption="";
         
         do{
             
             try{
-                fileChooser.showOpenDialog(fileChooser);
-                String ruta = fileChooser.getSelectedFile().getAbsolutePath();
-                this.rutaArchivo=ruta;
+                int seleccion=fileChooser.showOpenDialog(null);
+                File abre = null;
+                if(seleccion== JFileChooser.APPROVE_OPTION){
+                    abre=fileChooser.getSelectedFile(); 
+                    this.rutaArchivo=fileChooser.getSelectedFile().getAbsolutePath();
+                }else if(seleccion== JFileChooser.CANCEL_OPTION){
+                    System.out.println("cancela");
+                }
             }catch(Exception e){
                 int opcion=JOptionPane.showConfirmDialog(null,"No se ha seleccionado ningun archivo, ¿Desea seleccionar de nuevo un archivo?","Selecciona una opción",JOptionPane.YES_NO_CANCEL_OPTION);
                 System.out.println(""+opcion);
