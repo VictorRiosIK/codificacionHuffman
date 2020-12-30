@@ -40,15 +40,19 @@ public class Lector {
     }
     public String obtieneTexto(){
         try{
+            String textoReturn="";
             this.fileReader=new FileReader(this.archivo);
             buffer=new BufferedReader(this.fileReader);
             while((this.texto=this.buffer.readLine()) != null){
-                System.out.print(this.texto);
+                //System.out.print(this.texto);
+                textoReturn+=this.texto;
             }
+            return textoReturn;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Ocurrio un error leyendo el archivo");
         }
-        return this.texto;
+        return null;
+        
     }
     public String getPathArchivo(){
         return this.pathArchivoTxt;
