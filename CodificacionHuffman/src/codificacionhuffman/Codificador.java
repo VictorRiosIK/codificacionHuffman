@@ -52,7 +52,7 @@ public class Codificador {
         letras.addAll(hashSet);//eliminamos repetidos de la lista letras
         
         obtenerRepeticiones();
-        //imprimirListas(); metodo para imprimir las listas
+        //imprimirListasYRepeticiones(); metodo para imprimir las listas
     }
     
     public void obtenerRepeticiones(){//aqui llenamos las listas con letras y repeticiones
@@ -71,7 +71,7 @@ public class Codificador {
         }
     }
     
-    public void imprimirListas(){
+    public void imprimirListasYRepeticiones(){
         for (int i = 0; i < this.letras.size(); i++) {
             System.out.println("letra: " + this.letras.get(i) + " -repeticiones en texto: "+ this.repeticiones.get(i));
         }
