@@ -41,6 +41,27 @@ public class Nodo {
 		this.peso=peso;
 		setPadre(null);
 		setLetra(letra);
+		setIzquierda(null);
+		setDerecha(null);
+		
+	}
+	public Nodo(Integer peso,Character letra) {
+		this.binario=null;
+		this.peso=peso;
+		setPadre(null);
+		setLetra(letra);
+		setIzquierda(null);
+		setDerecha(null);
+		
+	}
+	public Nodo(Integer peso) {
+		this.binario=null;
+		this.peso=peso;
+		setPadre(null);
+		setLetra(null);
+		setIzquierda(null);
+		setDerecha(null);
+		
 	}
 	
 	public Nodo(Nodo padre,Character binario,Integer peso) {
