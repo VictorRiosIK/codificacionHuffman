@@ -27,11 +27,11 @@ public class Nodo {
 		setBinario(null);
 	}
 	
-	public Nodo(Character binario,Integer peso) {
-		this.binario=binario;
+	public Nodo(Character letra,Integer peso) {
+		this.letra=binario;
 		this.peso=peso;
+		setBinario(null);
 		setPadre(null);
-		setLetra(null);
 		setIzquierda(null);
 		setDerecha(null);
 	}

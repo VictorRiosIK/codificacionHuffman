@@ -9,6 +9,10 @@ public class Arbol implements Comparable<Arbol>{
 		raiz=null;
 	}
 	
+	public Arbol(Character letra,Integer repeticiones){
+		raiz=new Nodo(letra,repeticiones);
+	}
+	
 	public void Insertar(Integer peso,Character letra) {
 		raiz=new Nodo(peso,letra);
 	}
@@ -23,10 +27,26 @@ public class Arbol implements Comparable<Arbol>{
 		return raiz.getPeso();
 	}
 	
+	public Nodo getPadre() {
+		return raiz.getPadre();
+	}
+	
 	@Override
 	public int compareTo(Arbol arbol) {
 		// TODO Auto-generated method stub
 		return arbol.getPeso().compareTo(getPeso());
+	}
+	
+	public Nodo getIzquierda() {
+		return raiz.getIzquierda();
+	}
+	
+	public Nodo getDerecha() {
+		return raiz.getDerecha();
+	}
+	
+	public Nodo getId() {
+		return raiz;
 	}
 	
 	
