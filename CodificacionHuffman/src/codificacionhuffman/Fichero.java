@@ -36,7 +36,9 @@ public class Fichero {
         archivo.createNewFile();
         archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","CodificacionCaracteres.txt");
         archivo.createNewFile();
-         archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","CodificacionBin.txt");
+        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","CodificacionBin.txt");
+        archivo.createNewFile();
+        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","Entropia.txt");
         archivo.createNewFile();
     }
     public void obtenerFicheroALeer() {
@@ -97,6 +99,13 @@ public class Fichero {
             System.out.println("Error. No se tiene registro de ese archivo");
         }
     }
+    public void escribirEntropia(double entropia){
+         try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"Entropia.txt"),true))) {
+            out.write("Entropia: "+entropia+" bits\n");
+        }catch(FileNotFoundException fnfe){
+            System.out.println("Error. No se tiene registro de ese archivo");
+        }
+    }
     /*METODOS DE DESCOMPRESOR*/
     
     public void traerCodigosLetras(){
@@ -105,7 +114,6 @@ public class Fichero {
             
             while ((linea = br.readLine()) != null) {
                 String[] columnas = linea.split("=");
-                infoEmp="Telefono:"+ columnas[0]+ "RFC:" + columnas[1];
                 //System.out.println(infoEmp);
                 descompresor.agregarAListas(columnas[0],columnas[1]);
             }

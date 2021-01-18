@@ -24,13 +24,16 @@ public class Codificador {
     private String texto;
     private ArrayList<Character> letras;//lista para las letras
     private ArrayList<Integer> repeticiones;//lista para guardar las repticiones de cada letra de texto
+    private ArrayList<Float> probabilidad;
     private Set<Character> hashSet;
+    private Fichero fichero;
     public Codificador() throws IOException{
            this.escritorArchivo=new Escritor();
            this.lectorArchivo=new Lector();
-           
+           this.fichero=new Fichero();
            letras=new ArrayList<Character>();
            repeticiones=new ArrayList<Integer>();
+           probabilidad=new ArrayList<Float>();
            this.texto="";
     }
     public void calcularCodificacion() throws InterruptedException, IOException{
@@ -40,8 +43,24 @@ public class Codificador {
         texto=lectorArchivo.obtieneTexto();//texto obtenido del archivo
         separarCaracteres();
         this.compresor=new Compresor(texto);
-        
+        calculaProbabilidadLetras(texto);
     }
+    
+    public void calculaProbabilidadLetras(String textoOriginal){
+        float aux=0;
+        double auxEntropia=0,aux2=0;
+        for (int i = 0; i < repeticiones.size(); i++) {
+            aux=(float)repeticiones.get(i)/textoOriginal.length();
+               //System.out.println(""+repeticiones.get(i));
+            aux2=(double)1/aux;
+            auxEntropia+=(double)aux*log(aux2,2);
+            
+        }
+        fichero.escribirEntropia(auxEntropia);
+    }
+    private static Double log(double num, int base) {
+      return (Math.log10(num) / Math.log10(base));
+   }
     public void separarCaracteres(){
          
         for (int i = 0; i < this.texto.length(); i++) {
