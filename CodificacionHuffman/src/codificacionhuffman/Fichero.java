@@ -3,8 +3,10 @@ package codificacionhuffman;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -20,13 +22,22 @@ import javax.swing.JOptionPane;
  */
 public class Fichero {
     private File directorio;
+    private File archivo;
+    private Descompresor descompresor;
     private JFileChooser fileChooser;
     private String rutaArchivo;
-    public Fichero(){
+    public Fichero() throws IOException{
         fileChooser = new JFileChooser();
-        directorio=new File("C:\\CodificadorHuffman");
-        directorio.mkdir();
+        descompresor=new Descompresor();
         rutaArchivo="";
+        directorio=new File("C:\\CodificadorHuffman\\Codificacion");
+        directorio.mkdir();
+        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","Codificacion.txt");
+        archivo.createNewFile();
+        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","CodificacionCaracteres.txt");
+        archivo.createNewFile();
+         archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","CodificacionBin.txt");
+        archivo.createNewFile();
     }
     public void obtenerFicheroALeer() {
         String respJOption="";
@@ -39,6 +50,7 @@ public class Fichero {
                 if(seleccion== JFileChooser.APPROVE_OPTION){
                     abre=fileChooser.getSelectedFile(); 
                     this.rutaArchivo=fileChooser.getSelectedFile().getAbsolutePath();
+                        
                 }else if(seleccion== JFileChooser.CANCEL_OPTION){
                     System.out.println("cancela");
                 }
@@ -61,7 +73,50 @@ public class Fichero {
         
         }while(respJOption.equals("si"));
     }
+    public void escribrFichero(char caracter, String binarioAsociado){
+       // System.out.println("Llega" + "Char:"+caracter + "Binario:"+binarioAsociado);
+        
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"CodificacionCaracteres.txt"),true))) {
+            out.write(caracter+"="+binarioAsociado+"\n");
+        }catch(FileNotFoundException fnfe){
+            System.out.println("Error. No se tiene registro de ese archivo");
+        }
+    }
+    public void enviaBinario(String x){
+        
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"CodificacionBin.txt"),true))) {
+            out.write(x+"\n");
+        }catch(FileNotFoundException fnfe){
+            System.out.println("Error. No se tiene registro de ese archivo");
+        }
+    }
+    public void escribirCodificacion(String codificado){
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"Codificacion.txt"),true))) {
+            out.write(codificado+"\n");
+        }catch(FileNotFoundException fnfe){
+            System.out.println("Error. No se tiene registro de ese archivo");
+        }
+    }
+    /*METODOS DE DESCOMPRESOR*/
     
+    public void traerCodigosLetras(){
+         String linea, infoEmp = "";
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\CodificadorHuffman\\Codificacion\\"+"CodificacionCaracteres.txt"))){
+            
+            while ((linea = br.readLine()) != null) {
+                String[] columnas = linea.split("=");
+                infoEmp="Telefono:"+ columnas[0]+ "RFC:" + columnas[1];
+                //System.out.println(infoEmp);
+                descompresor.agregarAListas(columnas[0],columnas[1]);
+            }
+            }catch (FileNotFoundException ex) {
+                System.out.println("Error. No se tiene registro de ese archivo");
+            }
+            catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+       // descompresor.imprimeListas();
+    }
     public String getRuta(){
         return this.rutaArchivo;
     }

@@ -24,7 +24,7 @@ public class Lector {
     private String texto;
     private FileReader fileReader;
     private BufferedReader buffer;
-    public Lector(){
+    public Lector() throws IOException{
         this.fichero=new Fichero();
         this.texto="";
     }
@@ -47,6 +47,7 @@ public class Lector {
                 //System.out.print(this.texto);
                 textoReturn+=this.texto;
             }
+            
             return textoReturn;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Ocurrio un error leyendo el archivo");

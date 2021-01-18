@@ -1,6 +1,7 @@
 package codificacionhuffman;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,21 +25,21 @@ public class Codificador {
     private ArrayList<Character> letras;//lista para las letras
     private ArrayList<Integer> repeticiones;//lista para guardar las repticiones de cada letra de texto
     private Set<Character> hashSet;
-    public Codificador(){
+    public Codificador() throws IOException{
            this.escritorArchivo=new Escritor();
            this.lectorArchivo=new Lector();
-           this.compresor=new Compresor();
+           
            letras=new ArrayList<Character>();
            repeticiones=new ArrayList<Integer>();
            this.texto="";
     }
-    public void calcularCodificacion(){
+    public void calcularCodificacion() throws InterruptedException, IOException{
         JOptionPane.showMessageDialog(null,"\t\tBIENVENIDO AL COMPRESOR DE TEXTO MEDIANTE EL CODIGO DE HUFFMAN\n"
                 + "A continuación se le pedira que elija el archivo .txt a codificar");
         lectorArchivo.obtenerFichero();
         texto=lectorArchivo.obtieneTexto();//texto obtenido del archivo
         separarCaracteres();
-        
+        this.compresor=new Compresor(texto);
         
     }
     public void separarCaracteres(){
