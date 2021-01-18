@@ -17,9 +17,12 @@ public class Descompresor {
     private Fichero fichero;
     private ArrayList<String> letras;//lista para las letras
     private ArrayList<String> binariosAsociados;
-    Descompresor(){
+    Descompresor() throws InterruptedException, IOException{
+        
         this.letras=new ArrayList<String>();
         this.binariosAsociados=new ArrayList<String>();
+      
+        
     }
     
     public void agregarAListas(String binario,String letra){
@@ -36,5 +39,7 @@ public class Descompresor {
         for (int i = 0; i < letras.size(); i++) {
             System.out.println("Letra:"+letras.get(i)+", Binario:"+binariosAsociados.get(i));
         }
+    }
+    public void traerListas() throws IOException, InterruptedException{
     }
 }

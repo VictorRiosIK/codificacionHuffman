@@ -27,7 +27,7 @@ public class Codificador {
     private ArrayList<Float> probabilidad;
     private Set<Character> hashSet;
     private Fichero fichero;
-    public Codificador() throws IOException{
+    public Codificador() throws IOException, InterruptedException{
            this.escritorArchivo=new Escritor();
            this.lectorArchivo=new Lector();
            this.fichero=new Fichero();
@@ -36,6 +36,8 @@ public class Codificador {
            probabilidad=new ArrayList<Float>();
            this.texto="";
     }
+    
+    //aqui lee el archivo de texto que contiene el binario
     public void calcularCodificacion() throws InterruptedException, IOException{
         JOptionPane.showMessageDialog(null,"\t\tBIENVENIDO AL COMPRESOR DE TEXTO MEDIANTE EL CODIGO DE HUFFMAN\n"
                 + "A continuación se le pedira que elija el archivo .txt a codificar");
@@ -46,6 +48,15 @@ public class Codificador {
         calculaProbabilidadLetras(texto);
     }
     
+    
+    public void calcularDescompresor(){
+        JOptionPane.showMessageDialog(null,"\t\tBIENVENIDO AL DESCOMPRESOR DE TEXTO MEDIANTE EL CODIGO DE HUFFMAN\n"
+                + "A continuación se le pedira que elija el archivo .txt a codificar");
+        lectorArchivo.obtenerFichero();
+        texto=lectorArchivo.obtieneTexto();//texto obtenido del archivo
+        System.out.println("Binario de archivo: "+texto);
+        
+    }
     public void calculaProbabilidadLetras(String textoOriginal){
         float aux=0;
         double auxEntropia=0,aux2=0;

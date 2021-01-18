@@ -17,9 +17,10 @@ public class CodificacionHuffman {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException, IOException {
-        Codificador codificadorHoffman=new Codificador();
-        codificadorHoffman.calcularCodificacion();
-       
+        
+        PanelInicio panel=new PanelInicio();
+        panel.setVisible(true);
+        panel.setLocationRelativeTo(null);
     }
     
 }

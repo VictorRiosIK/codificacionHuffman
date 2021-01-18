@@ -26,7 +26,7 @@ public class Fichero {
     private Descompresor descompresor;
     private JFileChooser fileChooser;
     private String rutaArchivo;
-    public Fichero() throws IOException{
+    public Fichero() throws IOException, InterruptedException{
         fileChooser = new JFileChooser();
         descompresor=new Descompresor();
         rutaArchivo="";
@@ -109,7 +109,7 @@ public class Fichero {
     /*METODOS DE DESCOMPRESOR*/
     
     public void traerCodigosLetras(){
-         String linea, infoEmp = "";
+         String linea;
         try(BufferedReader br = new BufferedReader(new FileReader("C:\\CodificadorHuffman\\Codificacion\\"+"CodificacionCaracteres.txt"))){
             
             while ((linea = br.readLine()) != null) {
