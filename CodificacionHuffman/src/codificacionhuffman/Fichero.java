@@ -116,6 +116,7 @@ public class Fichero {
                 String[] columnas = linea.split("=");
                 //System.out.println(infoEmp);
                 descompresor.agregarAListas(columnas[0],columnas[1]);
+                
             }
             }catch (FileNotFoundException ex) {
                 System.out.println("Error. No se tiene registro de ese archivo");
@@ -123,6 +124,7 @@ public class Fichero {
             catch (IOException ioe) {
                 ioe.printStackTrace();
             }
+        descompresor.imprimeListas();
        // descompresor.imprimeListas();
     }
     public String getRuta(){

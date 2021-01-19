@@ -40,6 +40,5 @@ public class Descompresor {
             System.out.println("Letra:"+letras.get(i)+", Binario:"+binariosAsociados.get(i));
         }
     }
-    public void traerListas() throws IOException, InterruptedException{
-    }
+    
 }

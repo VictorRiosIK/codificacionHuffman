@@ -170,8 +170,11 @@ public class Compresor {
     }
     public void compruebaCadenasCompletasBinario(char caracter, String binario){
         String auxBin="0";
+        
         if(binario.length()==3){
            auxBin+=binario;
+        }else if(binario.length()==2){
+            auxBin+="0"+binario;
         }else{
             auxBin=binario;
         }
