@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -30,6 +33,8 @@ public class Fichero {
         fileChooser = new JFileChooser();
         descompresor=new Descompresor();
         rutaArchivo="";
+        directorio=new File("C:\\CodificadorHuffman");
+        directorio.mkdir();
         directorio=new File("C:\\CodificadorHuffman\\Codificacion");
         directorio.mkdir();
         archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","Codificacion.txt");
@@ -100,11 +105,19 @@ public class Fichero {
         }
     }
     public void escribirEntropia(double entropia){
-         try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"Entropia.txt"),true))) {
+        /* try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"Entropia.txt"),true))) {
             out.write("Entropia: "+entropia+" bits\n");
         }catch(FileNotFoundException fnfe){
             System.out.println("Error. No se tiene registro de ese archivo");
-        }
+        }*/try {
+  	       FileOutputStream fos = new FileOutputStream("C:\\CodificadorHuffman\\Codificacion\\"+"Entropia.txt");
+  	       Writer out = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
+  	       out.write("Entropia: "+entropia+" bits\n");
+  	       out.close();
+  	    } 
+  	    catch (IOException e) {
+  	       e.printStackTrace();
+  	    }
     }
     /*METODOS DE DESCOMPRESOR*/
     

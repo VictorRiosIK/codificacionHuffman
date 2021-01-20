@@ -36,7 +36,7 @@ public class PanelInicio extends JFrame {
      private Container contenedor;
      private final Fichero fichero;
       Codificador codificadorHoffman;
-    public PanelInicio() throws IOException {
+    public PanelInicio() throws IOException, InterruptedException {
         super();
         codificadorHoffman = new Codificador();
         this.fichero = new Fichero();
@@ -84,7 +84,7 @@ public class PanelInicio extends JFrame {
                     } 
                 break;
                 case 1:
-                   codificadorHoffman.calcularDescompresor();
+                   //codificadorHoffman.calcularDescompresor();
                 
             }
     

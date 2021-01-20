@@ -14,7 +14,9 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -33,13 +35,20 @@ public class Compresor {
     private String codigo;
     private String codigoEncriptado;
     private Fichero fichero;
-    
+    private int maximoBinario;
+    private Set<Character> hashSet;
+     private Set<String> hashSetS;
+    private ArrayList<Character> letras;//lista para las letras
+    private ArrayList<String> binarios;//lista para guardar las repticiones de cada letra de texto
     public Compresor(String mensajeCodificar) throws InterruptedException, IOException {
         mensaje = mensajeCodificar;
+        letras=new ArrayList<Character>();
+        binarios=new ArrayList<String>();
         camino = new Lista();
         resultado = "";
         codigo="";
         fichero=new Fichero();
+        maximoBinario=0;
         Lista l = ToNodos();
         ListaArboles la = cuentaLetras(l);
         ListaArboles l2 = juntaNodo(la);
@@ -56,7 +65,15 @@ public class Compresor {
         encriptar(x);
         //encripta(x);
         //Thread.sleep(2500);
-       
+        //rellenarBinarios();
+       /*hashSet= new HashSet<Character>(letras);
+        letras.clear();
+        letras.addAll(hashSet);//eliminamos repetidos de la lista letras
+      
+        hashSetS= new HashSet<String>(binarios);
+        binarios.clear();
+        binarios.addAll(hashSetS);//eliminamos repetidos de la lista letras*/
+        System.out.println("MAXIMO:"+maximoBinario);
     }
     
     public Compresor(String mensaje,String resultado) {
@@ -177,22 +194,43 @@ public class Compresor {
             aux = aux.getSiguiente();
         }
         //System.out.println("Camino:"+ camino + " Char:"+s);
-        //fichero.escribrFichero(s,camino);
-        compruebaCadenasCompletasBinario(s,camino);
+        letras.add(s);
+        binarios.add(camino);
+        if(compruebaCadenasCompletasBinario(s,camino)==1){
+           
+        }else{
+             fichero.escribrFichero(s,camino);
+             System.out.println(""+s+camino);
+        }
         return camino;
     }
-    public void compruebaCadenasCompletasBinario(char caracter, String binario){
-        String auxBin="0";
+    public void rellenarBinarios(){
+        //fichero.escribrFichero(caracter,auxBin);
         
-        if(binario.length()==3){
-           auxBin+=binario;
-        }else if(binario.length()==2){
-            auxBin+="0"+binario;
-        }else{
-            auxBin=binario;
+    }
+    public int compruebaCadenasCompletasBinario(char caracter, String binario){
+        int cantidadLetra=0;
+        obtenerMaximo(binario);
+        
+        for (int i = 0; i < letras.size(); i++) {
+            if(letras.get(i)==caracter){
+                cantidadLetra++;
+               // System.out.println("ENCONTRO"+caracter);
+            }
+           
         }
-        fichero.escribrFichero(caracter,auxBin);
-        auxBin="";
+        
+         if(cantidadLetra>1){
+                return 1;
+            }else{
+                return 0;
+            }
+    }
+    public void obtenerMaximo(String binario){
+        
+        if(binario.length()>maximoBinario){
+            maximoBinario=binario.length();
+        }
     }
     public String convierte(Lista camino) {
         String c = "";
@@ -295,7 +333,7 @@ public class Compresor {
    		 }
    	 }
    	cadenaFinal=cadenaFinal+String.valueOf(suma);
-   	 escribirCompresion(cadenaFinal);
+   	 //escribirCompresion(cadenaFinal);
     }
     
     private String rellenar(String cadena){
