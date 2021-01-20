@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class Escritor {
     private Fichero fichero;
-    public Escritor() throws IOException{
+    public Escritor() throws IOException, InterruptedException{
         this.fichero=new Fichero();
     }
 }

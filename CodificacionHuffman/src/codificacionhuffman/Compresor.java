@@ -6,7 +6,12 @@ import huffman.ListaArboles;
 import huffman.Nodo;
 import huffman.NodoArbol;
 import huffman.NodoListaArbol;
+
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +33,8 @@ public class Compresor {
     private String codigo;
     private String codigoEncriptado;
     private Fichero fichero;
-    Compresor(String mensajeCodificar) throws InterruptedException, IOException {
+    
+    public Compresor(String mensajeCodificar) throws InterruptedException, IOException {
         mensaje = mensajeCodificar;
         camino = new Lista();
         resultado = "";
@@ -46,11 +52,18 @@ public class Compresor {
         
         System.out.println("Binario" + x);
         this.codigoEncriptado=x;
-        fichero.enviaBinario(x);
-        encripta(x);
-        Thread.sleep(2500);
+        //fichero.enviaBinario(x);
+        encriptar(x);
+        //encripta(x);
+        //Thread.sleep(2500);
        
     }
+    
+    public Compresor(String mensaje,String resultado) {
+    	this.mensaje=mensaje;
+    	this.resultado=resultado;
+    }
+    
    
     public String getMensaje() {
         return mensaje;
@@ -251,6 +264,40 @@ public class Compresor {
         System.out.println("Codigo Encriptado " + codigo);
         
     }
+    
+    public void encriptar(String binario) {
+   	 int suma=0;
+   	 String cadenaFinal="";
+   	 int bandera=0;
+   	 String aux="";
+   	 int c=0;
+   	 
+   	 for(int i=0;i<binario.length();i++) {
+   		 if(binario.charAt(i)=='0') {
+   			 c++;
+   		 }
+   		 else if(binario.charAt(i)=='1' && bandera==0 ) {
+   			 bandera=1;
+   		 }
+   		 if(c==2) {
+   			 cadenaFinal=cadenaFinal+'a';   //0000100101 aa173  rre  
+   			 														
+   			 c=0;
+   		 } 
+   		 if(bandera==1) {
+   			 aux=aux+binario.charAt(i);
+   		 }
+   	 }
+   	 
+   	 for(int i=0;i<aux.length();i++) {
+   		 if(aux.charAt(i)=='1') {
+   			 suma=suma+(int)Math.pow(2,i);
+   		 }
+   	 }
+   	cadenaFinal=cadenaFinal+String.valueOf(suma);
+   	 escribirCompresion(cadenaFinal);
+    }
+    
     private String rellenar(String cadena){
         //Rellenamos la cadena con ceros a la izquierda
         String nueva="";
@@ -269,7 +316,21 @@ public class Compresor {
         
     }
         
-    
+    //Nueva forma de pensar problema
+        
+     
+     
+     private void escribirCompresion(String codigo) {
+    	 try {
+  	       FileOutputStream fos = new FileOutputStream("d:/prueba.txt");
+  	       Writer out = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
+  	       out.write(codigo);
+  	       out.close();
+  	    } 
+  	    catch (IOException e) {
+  	       e.printStackTrace();
+  	    } 
+     }
     
 	 //private ArrayList<Arbol> arbol;
 	 /*private ArrayList<Character> letras;//lista para las letras

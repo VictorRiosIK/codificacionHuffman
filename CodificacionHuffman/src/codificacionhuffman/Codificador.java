@@ -109,5 +109,6 @@ public class Codificador {
             System.out.println("letra: " + this.letras.get(i) + " -repeticiones en texto: "+ this.repeticiones.get(i));
         }
     }
+   
     
 }
