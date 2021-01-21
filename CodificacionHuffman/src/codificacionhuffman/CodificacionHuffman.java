@@ -30,6 +30,7 @@ public class CodificacionHuffman {
        panel.setLocationRelativeTo(null);
        
     	   System.out.println("Victor");
+    	   System.out.println("BBBBB");
     	
     	
     }
