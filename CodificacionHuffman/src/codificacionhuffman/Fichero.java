@@ -39,9 +39,9 @@ public class Fichero {
         directorio.mkdir();
         archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","Codificacion.txt");
         archivo.createNewFile();
-        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","CodificacionCaracteres.txt");
+        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","llave2.txt");
         archivo.createNewFile();
-        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","CodificacionBin.txt");
+        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","llave.txt");
         archivo.createNewFile();
         archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","Entropia.txt");
         archivo.createNewFile();
@@ -86,26 +86,45 @@ public class Fichero {
     public void escribrFichero(char caracter, String binarioAsociado){
        // System.out.println("Llega" + "Char:"+caracter + "Binario:"+binarioAsociado);
         
-        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"CodificacionCaracteres.txt"),true))) {
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"llave2.txt"),true))) {
             out.write(caracter+"="+binarioAsociado+"\n");
         }catch(FileNotFoundException fnfe){
             System.out.println("Error. No se tiene registro de ese archivo");
         }
+        
     }
     public void enviaBinario(String x){
         
-        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"CodificacionBin.txt"),true))) {
+        /*try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+".txt"),true))) {
             out.write(x+"\n");
         }catch(FileNotFoundException fnfe){
             System.out.println("Error. No se tiene registro de ese archivo");
-        }
+        }*/
+        try {
+  	       FileOutputStream fos = new FileOutputStream("C:\\CodificadorHuffman\\Codificacion\\"+"llave.txt");
+  	       Writer out = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
+  	       out.write(x+"\n");
+  	       out.close();
+  	    } 
+  	    catch (IOException e) {
+  	       e.printStackTrace();
+  	    }
     }
     public void escribirCodificacion(String codificado){
-        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"Codificacion.txt"),true))) {
+        /*try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"Codificacion.txt"),true))) {
             out.write(codificado+"\n");
         }catch(FileNotFoundException fnfe){
             System.out.println("Error. No se tiene registro de ese archivo");
-        }
+        }*/
+        try {
+  	       FileOutputStream fos = new FileOutputStream("C:\\CodificadorHuffman\\Codificacion\\"+"Codificacion.txt");
+  	       Writer out = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
+  	       out.write(codificado+"\n");
+  	       out.close();
+  	    } 
+  	    catch (IOException e) {
+  	       e.printStackTrace();
+  	    }
     }
     public void escribirEntropia(double entropia){
         /* try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"Entropia.txt"),true))) {
