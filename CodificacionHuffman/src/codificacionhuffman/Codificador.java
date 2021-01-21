@@ -70,28 +70,32 @@ public class Codificador {
         //2 listas que vaa  ser una de caracter y otra de binario asociado a ese caracter
         //traer el texto binario completo
         //crear objeto descompresor en el constuctor(lista letras, lista binarios, el textoCompleto)
-        separarCaracteres(texto2);
-        longitud=String.valueOf(texto.charAt(texto.length()-1));
        
+        longitud=String.valueOf(texto.charAt(texto.length()-1));
+        separarCaracteres(texto2,Integer.parseInt(longitud));
         //System.out.println("LONGITUD DE DIVISIONES: " + Integer.parseInt(longitud));
         this.descompresor=new Descompresor(texto,letras,binarios,Integer.parseInt(longitud));
     }
-    public void separarCaracteres(String texto){
+    public void separarCaracteres(String texto, int longitud){
         letras.add(texto.charAt(0));
         for (int i = 2; i < texto.length()-1; i++) {
             String aux="";
-            aux=texto.substring(i,i+5);
+            aux=texto.substring(i,i+longitud);
             binarios.add(aux);
             try{
-                letras.add(texto.charAt(i+5));
+                letras.add(texto.charAt(i+longitud));
             }catch(Exception e){
                 
             }
-            i=i+6;
+            i=i+(longitud+1);
         }
         System.out.println("LISTAS");
         for (int i = 0; i < letras.size(); i++) {
-            System.out.println("Letra: "+ letras.get(i)+" BINARIO ASOCIADO: " + binarios.get(i));
+            try{
+                System.out.println("Letra: "+ letras.get(i)+" BINARIO ASOCIADO: " + binarios.get(i));
+            }catch(Exception e){
+                
+            }
         }
     }
     

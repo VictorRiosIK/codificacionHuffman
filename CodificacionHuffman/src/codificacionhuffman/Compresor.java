@@ -29,6 +29,7 @@ import java.util.Set;
  * @author HUGO
  */
 public class Compresor {
+   private ArrayList<String> binarioA;
     private String mensaje;
     private String resultado;
     private Lista camino;
@@ -44,6 +45,7 @@ public class Compresor {
         mensaje = mensajeCodificar;
         letras=new ArrayList<Character>();
         binarios=new ArrayList<String>();
+        binarioA=new ArrayList<String>();
         camino = new Lista();
         resultado = "";
         codigo="";
@@ -70,13 +72,24 @@ public class Compresor {
             System.out.println("LETRA"+letras.get(i) + "BINARIO"+binarios.get(i));
              //fichero.escribrFichero(letras.get(i),binarios.get(i));
              //System.out.println(""+s+camino);
-             rellenarBinarios(letras.get(i),binarios.get(i));
+             rellenarBinarios(letras.get(i),binarios.get(i),i);
+             
         }
         
-        x+=maximoBinario;
-        fichero.enviaBinario(x);
+        //x+=maximoBinario;
+        //fichero.enviaBinario(x);
+        
+        rellenarOriginal();
+        Thread.sleep(2000);
+            System.out.println("IMPRIME RELLENOS ");
+        for (int i = 0; i < binarioA.size(); i++) {
+           System.out.println("LETRA"+letras.get(i) + "BINARIO"+binarioA.get(i));
+        }
+    
+    
+    
     }
-    public void rellenarBinarios(char caracter, String binario){
+    public void rellenarBinarios(char caracter, String binario, int pos){
         //fichero.escribrFichero(caracter,auxBin);
         String auxBin="";
         if(binario.length()<maximoBinario){
@@ -85,13 +98,33 @@ public class Compresor {
             }
             auxBin+=binario;
             fichero.escribrFichero(caracter,auxBin);
+            binarioA.add(auxBin);
+            
         }else{
             fichero.escribrFichero(caracter,binario);
+            binarioA.add(auxBin);
         }
     }
     public Compresor(String mensaje,String resultado) {
     	this.mensaje=mensaje;
     	this.resultado=resultado;
+    }
+    
+    public  void rellenarOriginal(){
+        String binarioNuevo="";
+        
+        for(int i=0;i<mensaje.length();i++){
+            
+            for(int j=0;j<letras.size();j++){
+                if(mensaje.charAt(i)==letras.get(j)){
+                    binarioNuevo+=binarioA.get(j);
+                }
+            }
+        }
+        
+       //rellenarBinarios(letras.get(i),binarios.get(i));
+         fichero.enviaBinario(binarioNuevo);
+        
     }
     
    
