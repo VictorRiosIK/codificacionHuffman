@@ -29,7 +29,7 @@ public class CodificacionHuffman {
        panel.setVisible(true);
        panel.setLocationRelativeTo(null);
        
-    	   System.out.println("AAAAAA");
+    	   System.out.println("Kevin");
     	
     	
     }
