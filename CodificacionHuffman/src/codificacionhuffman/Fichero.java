@@ -150,7 +150,7 @@ public class Fichero {
             while ((linea = br.readLine()) != null) {
                 String[] columnas = linea.split("=");
                 //System.out.println(infoEmp);
-                descompresor.agregarAListas(columnas[0],columnas[1]);
+               
                 
             }
             }catch (FileNotFoundException ex) {

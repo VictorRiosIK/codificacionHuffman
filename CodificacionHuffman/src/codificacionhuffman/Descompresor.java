@@ -31,7 +31,9 @@ public class Descompresor {
         this.longitud=longitud;
      // fichero=new Fichero("descomprimir");
     }
-    
+    Descompresor(){
+        
+    }
    /* public void agregarAListas(String binario,String letra){
         try{
             letras.add(binario.toString());
