@@ -46,6 +46,9 @@ public class Fichero {
         archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","Entropia.txt");
         archivo.createNewFile();
     }
+    public Fichero(String eccion){
+        
+    }
     public void obtenerFicheroALeer() {
         String respJOption="";
         

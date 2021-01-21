@@ -21,8 +21,8 @@ public class Descompresor {
         
         this.letras=new ArrayList<String>();
         this.binariosAsociados=new ArrayList<String>();
-      
-        
+      fichero=new Fichero("descomprimir");
+       
     }
     
     public void agregarAListas(String binario,String letra){

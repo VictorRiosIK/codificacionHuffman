@@ -74,6 +74,8 @@ public class Compresor {
         binarios.clear();
         binarios.addAll(hashSetS);//eliminamos repetidos de la lista letras*/
         System.out.println("MAXIMO:"+maximoBinario);
+        
+        
     }
     
     public Compresor(String mensaje,String resultado) {

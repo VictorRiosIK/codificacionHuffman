@@ -24,7 +24,7 @@ public class Lector {
     private String texto;
     private FileReader fileReader;
     private BufferedReader buffer;
-    public Lector() throws IOException{
+    public Lector() throws IOException, InterruptedException{
         this.fichero=new Fichero();
         this.texto="";
     }
