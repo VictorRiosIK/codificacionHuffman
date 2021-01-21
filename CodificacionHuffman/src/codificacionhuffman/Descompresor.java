@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class Descompresor {
-    
+        private Fichero fichero;
 	//private Fichero fichero;
         private String binario;
         private ArrayList<Character> letras;//lista para las letras
@@ -23,20 +23,24 @@ public class Descompresor {
         private String mensaje;
         private int longitud;
     
-        Descompresor(String binario,ArrayList<Character> letras,ArrayList<String> binariosAsociados,int longitud) throws InterruptedException, IOException{
+        Descompresor(String pathKey1, String pathKey2) throws InterruptedException, IOException{
             this.binario=binario;
             this.letras=letras;
             this.binariosAsociados=binariosAsociados;
             this.mensaje="";
             this.longitud=longitud;
-            descomprimir();
-            System.out.println("MENSAJE" + mensaje);
+            fichero=new Fichero();
+            fichero.abrirAmbosFicherosDesompresion(pathKey1, pathKey2);
+           // descomprimir();
             
      // fichero=new Fichero("descomprimir");
         }
         Descompresor(){
 
         }
+        
+        
+        
    /* public void agregarAListas(String binario,String letra){
         try{
             letras.add(binario.toString());
@@ -46,6 +50,17 @@ public class Descompresor {
         }
     }*/
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     public void imprimeListas(){
         for (int i = 0; i < letras.size(); i++) {

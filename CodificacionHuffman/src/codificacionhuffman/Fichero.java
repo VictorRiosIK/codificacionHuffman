@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -29,21 +30,29 @@ public class Fichero {
     private Descompresor descompresor;
     private JFileChooser fileChooser;
     private String rutaArchivo;
+    private ArrayList<String> binarios;
+    private ArrayList<Character> letras;
     public Fichero() throws IOException, InterruptedException{
         fileChooser = new JFileChooser();
         descompresor=new Descompresor();
         rutaArchivo="";
+        binarios=new ArrayList<String>();
+        letras=new ArrayList<Character>();
+      
         directorio=new File("C:\\CodificadorHuffman");
         directorio.mkdir();
         directorio=new File("C:\\CodificadorHuffman\\Codificacion");
         directorio.mkdir();
+        
         archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","Codificacion.txt");
-        archivo.createNewFile();
-        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","llave2.txt");
         archivo.createNewFile();
         archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","llave.txt");
         archivo.createNewFile();
+        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","codigoComprimido.txt");
+        archivo.createNewFile();
         archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","Entropia.txt");
+        archivo.createNewFile();
+        archivo=new File("C:\\CodificadorHuffman\\Codificacion\\","codigoDescomprimido.txt");
         archivo.createNewFile();
     }
     public Fichero(String eccion){
@@ -86,8 +95,8 @@ public class Fichero {
     public void escribrFichero(char caracter, String binarioAsociado){
        // System.out.println("Llega" + "Char:"+caracter + "Binario:"+binarioAsociado);
         
-        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"llave2.txt"),true))) {
-            out.write(caracter+"="+binarioAsociado+"\n");
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"llave.txt"),true))) {
+            out.write(caracter+"ª"+binarioAsociado+"\n");
         }catch(FileNotFoundException fnfe){
             System.out.println("Error. No se tiene registro de ese archivo");
         }
@@ -95,12 +104,12 @@ public class Fichero {
     }
     public void enviaBinario(String x){
         
-        /*try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+".txt"),true))) {
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"codigoComprimido.txt"),true))) {
             out.write(x+"\n");
         }catch(FileNotFoundException fnfe){
             System.out.println("Error. No se tiene registro de ese archivo");
-        }*/
-        try {
+        }
+        /*try {
   	       FileOutputStream fos = new FileOutputStream("C:\\CodificadorHuffman\\Codificacion\\"+"llave.txt");
   	       Writer out = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
   	       out.write(x+"\n");
@@ -108,15 +117,15 @@ public class Fichero {
   	    } 
   	    catch (IOException e) {
   	       e.printStackTrace();
-  	    }
+  	    }*/
     }
     public void escribirCodificacion(String codificado){
-        /*try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"Codificacion.txt"),true))) {
-            out.write(codificado+"\n");
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"Codificacion.txt"),true))) {
+            out.write(codificado);
         }catch(FileNotFoundException fnfe){
             System.out.println("Error. No se tiene registro de ese archivo");
-        }*/
-        try {
+        }
+        /*try {
   	       FileOutputStream fos = new FileOutputStream("C:\\CodificadorHuffman\\Codificacion\\"+"Codificacion.txt");
   	       Writer out = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
   	       out.write(codificado+"\n");
@@ -124,7 +133,7 @@ public class Fichero {
   	    } 
   	    catch (IOException e) {
   	       e.printStackTrace();
-  	    }
+  	    }*/
     }
     public void escribirEntropia(double entropia){
         /* try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"Entropia.txt"),true))) {
@@ -148,7 +157,7 @@ public class Fichero {
         try(BufferedReader br = new BufferedReader(new FileReader("C:\\CodificadorHuffman\\Codificacion\\"+"CodificacionCaracteres.txt"))){
             
             while ((linea = br.readLine()) != null) {
-                String[] columnas = linea.split("=");
+                String[] columnas = linea.split("ª");
                 //System.out.println(infoEmp);
                
                 
@@ -162,6 +171,72 @@ public class Fichero {
         descompresor.imprimeListas();
        // descompresor.imprimeListas();
     }
+    public void llenarCodigoDescomprimido(String descifrado){
+       
+  	       try (PrintWriter out = new PrintWriter(new FileOutputStream(("C:\\CodificadorHuffman\\Codificacion\\"+"codigoDescomprimido.txt"),true))) {
+            out.write(descifrado);
+        }catch(FileNotFoundException fnfe){
+            System.out.println("Error. No se tiene registro de ese archivo");
+        }
+  	     
+  	    
+    }
+    public void abrirAmbosFicherosDesompresion(String pathKey1, String pathKey2){
+        System.out.println(""+pathKey1);
+         System.out.println(""+pathKey2);
+        String mensaje="";
+        String linea;
+         BufferedReader aux;
+        try(BufferedReader br1 = new BufferedReader(new FileReader(pathKey1))){
+              
+            while ((linea = br1.readLine()) != null) {//C:\\CodificadorHuffman\\Codificacion\\"+"llave.txt
+                
+                    
+                String[] columnas = linea.split("ª");
+                 
+                binarios.add(columnas[1]);
+                letras.add(columnas[0].charAt(0));
+                /*if(linea.equals(columnas[1])){
+                    escribirCodificacion("IGUAL"+ columnas[0]);
+                }*/
+                
+            }
+            }catch (Exception ex) {
+                System.out.println("Error. No se tiene registro de ese archivo"+ex.getMessage());
+            }
+        
+        compruebaBinarioCompletoConLista(pathKey2);
+        
+    }
+    public void compruebaBinarioCompletoConLista(String pathKey2){
+        String mensaje="";
+        String linea;
+        try(BufferedReader br1 = new BufferedReader(new FileReader(pathKey2))){
+              
+                
+                while( (linea = br1.readLine()) != null){//"C:\\CodificadorHuffman\\Codificacion\\"+"codigoComprimido.txt"
+                      
+                      
+                    /*if(a.equals(binarios.get(i))){
+                      escribirCodificacion("IGUAL"+ letras.get(i));  
+                    }
+                    if(i==3){
+                        i=0;
+                    }*/
+                       for (int j = 0; j < binarios.size(); j++) {
+                           if(linea.equals(binarios.get(j))){
+                               llenarCodigoDescomprimido(""+letras.get(j));  
+                           }
+                        }
+                }
+                
+                
+            
+            }catch (Exception ex) {
+                System.out.println("Error. No se tiene registro de ese archivo"+ex.getMessage());
+            }
+    }
+    
     public String getRuta(){
         return this.rutaArchivo;
     }

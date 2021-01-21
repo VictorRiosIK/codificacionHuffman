@@ -22,7 +22,8 @@ public class Codificador {
     private Lector lectorArchivo;
     private Compresor compresor;
     private String texto;
-    private String texto2;
+    private String pathKey2;
+    private String pathKey1;
     private ArrayList<Character> letras;//lista para las letras
     private ArrayList<String> binarios;
     private ArrayList<Integer> repeticiones;//lista para guardar las repticiones de cada letra de texto
@@ -39,8 +40,8 @@ public class Codificador {
            binarios=new ArrayList<String>();
            repeticiones=new ArrayList<Integer>();
            probabilidad=new ArrayList<Float>();
-           this.texto="";
-            this.texto2="";
+           this.pathKey1="";
+            this.pathKey2="";
     }
     
     //aqui lee el archivo de texto que contiene el binario
@@ -58,26 +59,30 @@ public class Codificador {
     public void calcularDescompresor() throws IOException, InterruptedException{
         String longitud;
         JOptionPane.showMessageDialog(null,"\t\tBIENVENIDO AL DESCOMPRESOR DE TEXTO MEDIANTE EL CODIGO DE HUFFMAN\n"
-                + "A continuación se le pedira que elija el archivo .txt a descomprimir");
+                + "A continuación se le pedira que elija el archivo llave.txt a descomprimir");
         lectorArchivo.obtenerFichero();
-        texto=lectorArchivo.obtieneTexto();//texto obtenido del archivo
-        System.out.println("Binario de archivo: "+texto);
-        //
+        pathKey1=lectorArchivo.getPathArchivo();//texto obtenido del archivo
+        
+        
+        
+        
+        JOptionPane.showMessageDialog(null,"\t\t"+ "A continuación se le pedira que elija el archivo codigoComprimido.txt a descomprimir");
         lectorArchivo.obtenerFichero();
-        texto2=lectorArchivo.obtieneTexto();
-         System.out.println("arreglos: "+texto2);
+        //texto2=lectorArchivo.obtieneTexto();
+        pathKey2=lectorArchivo.getPathArchivo();
+        
         //TRAER LOS DATOS
         //2 listas que vaa  ser una de caracter y otra de binario asociado a ese caracter
         //traer el texto binario completo
         //crear objeto descompresor en el constuctor(lista letras, lista binarios, el textoCompleto)
-       
-        longitud=String.valueOf(texto.charAt(texto.length()-1));
-        separarCaracteres(texto2,Integer.parseInt(longitud));
         //System.out.println("LONGITUD DE DIVISIONES: " + Integer.parseInt(longitud));
-        this.descompresor=new Descompresor(texto,letras,binarios,Integer.parseInt(longitud));
+        this.descompresor=new Descompresor(pathKey1,pathKey2);
     }
-    public void separarCaracteres(String texto, int longitud){
-        letras.add(texto.charAt(0));
+    public void separarCaracteres(String texto){
+        
+        System.out.println("LLAVE 2 " + texto);
+        
+        /*letras.add(texto.charAt(0));
         for (int i = 2; i < texto.length()-1; i++) {
             String aux="";
             aux=texto.substring(i,i+longitud);
@@ -96,7 +101,7 @@ public class Codificador {
             }catch(Exception e){
                 
             }
-        }
+        }*/
     }
     
     public void calculaProbabilidadLetras(String textoOriginal){
@@ -109,6 +114,7 @@ public class Codificador {
             auxEntropia+=(double)aux*log(aux2,2);
             
         }
+        System.out.println("ENTROPIA"+auxEntropia);
         fichero.escribirEntropia(auxEntropia);
     }
     private static Double log(double num, int base) {
@@ -116,8 +122,12 @@ public class Codificador {
    }
     public void separarCaracteres(){
          
-        for (int i = 0; i < this.texto.length(); i++) {
+        try{
+            for (int i = 0; i < this.texto.length(); i++) {
             letras.add(this.texto.toLowerCase().charAt(i));//transformamos todas a minisculas para facilitar el manejo de las letras 
+            
+        }
+        }catch(Exception e){
             
         }
         hashSet= new HashSet<Character>(letras);
