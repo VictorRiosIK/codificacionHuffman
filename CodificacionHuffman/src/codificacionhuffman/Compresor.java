@@ -64,16 +64,7 @@ public class Compresor {
         this.codigoEncriptado=x;
         //fichero.enviaBinario(x);
         encriptar(x);
-        //encripta(x);
-        //Thread.sleep(2500);
-        //rellenarBinarios();
-       /*hashSet= new HashSet<Character>(letras);
-        letras.clear();
-        letras.addAll(hashSet);//eliminamos repetidos de la lista letras
-      
-        hashSetS= new HashSet<String>(binarios);
-        binarios.clear();
-        binarios.addAll(hashSetS);//eliminamos repetidos de la lista letras*/
+       
         System.out.println("MAXIMO:"+maximoBinario);
         for (int i = 0; i < letras.size(); i++) {
             System.out.println("LETRA"+letras.get(i) + "BINARIO"+binarios.get(i));
