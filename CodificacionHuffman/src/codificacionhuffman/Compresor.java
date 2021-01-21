@@ -60,24 +60,35 @@ public class Compresor {
         String x = convierte(listaCaminos);
         
         System.out.println("Binario" + x);
+        
         this.codigoEncriptado=x;
         //fichero.enviaBinario(x);
         encriptar(x);
-        //encripta(x);
-        //Thread.sleep(2500);
-        //rellenarBinarios();
-       /*hashSet= new HashSet<Character>(letras);
-        letras.clear();
-        letras.addAll(hashSet);//eliminamos repetidos de la lista letras
-      
-        hashSetS= new HashSet<String>(binarios);
-        binarios.clear();
-        binarios.addAll(hashSetS);//eliminamos repetidos de la lista letras*/
+       
         System.out.println("MAXIMO:"+maximoBinario);
+        for (int i = 0; i < letras.size(); i++) {
+            System.out.println("LETRA"+letras.get(i) + "BINARIO"+binarios.get(i));
+             //fichero.escribrFichero(letras.get(i),binarios.get(i));
+             //System.out.println(""+s+camino);
+             rellenarBinarios(letras.get(i),binarios.get(i));
+        }
         
-        
+        x+=maximoBinario;
+        fichero.enviaBinario(x);
     }
-    
+    public void rellenarBinarios(char caracter, String binario){
+        //fichero.escribrFichero(caracter,auxBin);
+        String auxBin="";
+        if(binario.length()<maximoBinario){
+            for (int i = binario.length(); i < maximoBinario; i++) {
+                auxBin+="0";
+            }
+            auxBin+=binario;
+            fichero.escribrFichero(caracter,auxBin);
+        }else{
+            fichero.escribrFichero(caracter,binario);
+        }
+    }
     public Compresor(String mensaje,String resultado) {
     	this.mensaje=mensaje;
     	this.resultado=resultado;
@@ -196,21 +207,28 @@ public class Compresor {
             aux = aux.getSiguiente();
         }
         //System.out.println("Camino:"+ camino + " Char:"+s);
-        letras.add(s);
-        binarios.add(camino);
+        
+            int auxCount=0;
+            for (int i = 0; i <letras.size(); i++) {
+                if(letras.get(i)==s){
+                    auxCount++;
+                }
+            }
+            if(auxCount<1){
+                letras.add(s);
+                binarios.add(camino);
+            }
+        
         if(compruebaCadenasCompletasBinario(s,camino)==1){
            
         }else{
-             fichero.escribrFichero(s,camino);
+            /* fichero.escribrFichero(s,camino);
              System.out.println(""+s+camino);
-             rellenarBinarios();
+             rellenarBinarios(s,camino);*/
         }
         return camino;
     }
-    public void rellenarBinarios(){
-        //fichero.escribrFichero(caracter,auxBin);
-        
-    }
+    
     public int compruebaCadenasCompletasBinario(char caracter, String binario){
         int cantidadLetra=0;
         obtenerMaximo(binario);
@@ -222,7 +240,6 @@ public class Compresor {
             }
            
         }
-        
          if(cantidadLetra>1){
                 return 1;
             }else{
