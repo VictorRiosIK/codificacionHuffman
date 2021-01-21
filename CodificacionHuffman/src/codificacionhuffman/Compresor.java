@@ -203,6 +203,7 @@ public class Compresor {
         }else{
              fichero.escribrFichero(s,camino);
              System.out.println(""+s+camino);
+             rellenarBinarios();
         }
         return camino;
     }
