@@ -66,34 +66,14 @@ public class Compresor {
         this.codigoEncriptado=x;
         //fichero.enviaBinario(x);
         encriptar(x);
-       encripta(x);
-  
+        encripta(x);
         rellenarOriginal();
-        //x+=maximoBinario;
-        //fichero.enviaBinario(x);
         
-        /*rellenarOriginal();*/
-        /*Thread.sleep(2000);
-            System.out.println("IMPRIME RELLENOOOOOOOOS ");
-        for (int i = 0; i < binarios.size(); i++) {
-           System.out.println("LETRA"+letras.get(i) + "BINARIO"+binarios.get(i));
-        }*/
     }
     public void rellenarBinarios(char caracter, String binario){
-        //fichero.escribrFichero(caracter,auxBin);
+        
         String auxBin="";
-        /*if(binario.length()<maximoBinario){
-            for (int i = binario.length(); i < maximoBinario; i++) {
-                auxBin+="0";
-            }
-            auxBin+=binario;
-            fichero.escribrFichero(caracter,auxBin);
-            binarioA.add(auxBin);
-            
-        }else{
-            fichero.escribrFichero(caracter,binario);
-            binarioA.add(auxBin);
-        }*/
+        
         fichero.escribrFichero(caracter,binario);
     }
     public Compresor(String mensaje,String resultado) {
@@ -117,14 +97,9 @@ public class Compresor {
         }
         }catch(Exception e){
             
-        }
-        
-
-         
-        
+        }    
     }
-    
-   
+
     public String getMensaje() {
         return mensaje;
     }
@@ -193,7 +168,7 @@ public class Compresor {
             n = n.getSiguiente();
         }
     }
-
+    //VAMOS SACANDO LOS NODOS FORMADOS POR LOS CARACTERES PARA PODER AGREGARLOS A LA LISTA DE CAMINOS
     public String eliminarUltimo(String re) {
         String cadena = "";
         for (int i = 0; i < re.length() - 1; i++) {
@@ -202,6 +177,7 @@ public class Compresor {
         return cadena;
     }
 
+    //DETERMINA EL CAMINO Y EL BINARIO ASOCIADO A ESE CARACTER
     public void encuentraCamino(NodoArbol r, String c) {
         // Lista camino = new Lista();
         resultado += c;
@@ -226,7 +202,7 @@ public class Compresor {
         // caminos de cada caracter
         return camino;
     }
-
+    //BUSCA EL CAMINO PARA LLEGAR A LA LETRA EN LOS NODOS DEL ARBOL
     public String busca(char s, Lista l) {
         String camino = "";
         Nodo aux = l.getInicio();
@@ -238,11 +214,12 @@ public class Compresor {
         }
         //System.out.println("Camino:"+ camino + " Char:"+s);
         
-           letras.add(s);
+        letras.add(s);
         fichero.enviaBinario(camino);
         if(compruebaCadenasCompletasBinario(s,camino)==1){
            
         }else{
+            //ESCRIBE EN EL ARCHIVO LAS ASOCIACIONES DE CARACTER Y BINARIO
              fichero.escribrFichero(s,camino);
              System.out.println(""+s+camino);
             // rellenarBinarios(s,camino);
@@ -281,7 +258,7 @@ public class Compresor {
         }System.out.println("Convierte"+ c);
         return c;
     }
-
+    //OBITNE EL BINARIO DE 8 BITS Y LO PASA A ENTERO
     public char toAscii(String s) {// obtiene un codigo de 8 o menor
         String ascii = "";
         int numero = 0;
@@ -299,6 +276,7 @@ public class Compresor {
         return (char) numero;
     }
 
+       //CONVIERTE A ASCII EL BINARIO, SEPARANDOLO DE  8 EN 8
     public void encripta(String codigoHuffman) {
         String bites = "";
         String codigo = "";
@@ -322,6 +300,7 @@ public class Compresor {
             codigo = codigo + c;
         }
         System.out.println("" + codigo);
+        //ESCRIBE CODIFICACION EN ASCII EN EL ARCHIVO Codificacion
         fichero.escribirCodificacion(codigo);
         
     }
@@ -410,116 +389,5 @@ public class Compresor {
   	    catch (IOException e) {
   	       e.printStackTrace();
   	    } 
-     }
-    
-	 //private ArrayList<Arbol> arbol;
-	 /*private ArrayList<Character> letras;//lista para las letras
-	 private ArrayList<Integer> repeticiones;//lista para guardar las repticiones de cada letra de texto
-	 private String codigoLetra;
-	 public Compresor(ArrayList<Arbol> arbol, ArrayList<Character> letras, ArrayList<Integer> repeticiones) {
-		super();
-		this.arbol = arbol;
-		this.letras = letras;
-		this.repeticiones = repeticiones;
-	}
-	 
-	public Compresor() {
-			arbol = new ArrayList<Arbol>();
-			letras = new ArrayList<Character>();
-			repeticiones = new ArrayList<Integer>();
-	}
-
-	public void insertarDatos(ArrayList<Character> letras,ArrayList<Integer> repeticiones ) {
-		this.letras=letras;
-		this.repeticiones=repeticiones;
-		
-	 }
-	 
-	 public void Fucionar(Nodo uno,Nodo dos) {
-		 Integer suma=uno.getPeso()+dos.getPeso();
-		 
-		 Arbol aux=new Arbol();
-		 dos.setPadre(aux.getPadre());
-		 uno.setPadre(aux.getPadre());
-		 
-		 if(uno.getPeso()>dos.getPeso()) {
-			 aux.InsertarNodoSolo(dos,uno,suma); 
-		 }
-		 else {
-			 aux.InsertarNodoSolo(uno,dos,suma);
-		 }
-		 arbol.remove(0);
-		 arbol.remove(0);
-		 arbol.add(aux);	
-		 Collections.sort(arbol);
-	}
-	 
-	public void llenarCola() {
-		
-		for(int i=0;i<repeticiones.size();i++) {
-			arbol.add(crearArbol(letras.get(i),repeticiones.get(i)));
-		}
-		Collections.sort(arbol);
-		
-	}
-	
-	public Arbol crearArbol(Character letra,Integer repeticiones) {
-		Arbol aux=new Arbol(letra,repeticiones);
-		return aux;
-		
-	}
-	
-	public void establecerBinario(Nodo auxiliar) {
-		if(auxiliar==null) {
-			
-		}
-		else {
-			if(auxiliar.getIzquierda()!=null) {
-				auxiliar.getIzquierda().setBinario('1');
-				establecerBinario(auxiliar.getIzquierda());
-			}
-			if(auxiliar.getDerecha()!=null) {
-				auxiliar.getDerecha().setBinario('0');
-				establecerBinario(auxiliar.getDerecha());
-			}
-			
-		}
-	}
-	
-	public void encontrarCodigo(Nodo auxiliar,String codigo,Character letra) {
-		if(auxiliar==null) {
-			
-		}
-		else {
-			if(auxiliar.getIzquierda()!=null) {
-				codigo=codigo+auxiliar.getIzquierda().getBinario();
-				encontrarCodigo(auxiliar.getIzquierda(),codigo,letra);
-			}
-			if(auxiliar.getDerecha()!=null) {
-				codigo=codigo.substring(0,codigo.length()-1);
-				codigo=codigo+auxiliar.getDerecha().getBinario();
-				encontrarCodigo(auxiliar.getDerecha(),codigo,letra);
-			}
-			if(auxiliar.getIzquierda()==null && auxiliar.getDerecha()==null) {
-				if(auxiliar.getLetra()==letra) {
-					codigoLetra=codigo;
-				}
-			}
-			
-		}
-	}
-	
-	public void asignarCodigo() {
-		for(int i=0;i<letras.size();i++) {
-			encontrarCodigo(arbol.get(0).getId(),"",letras.get(i));
-			//--------aqui se pasa al archivo falta codigo para archivo
-		}
-	}
-	*/
-	
-	
-	 
-	 
-	 
-	 
+     }	 
 }

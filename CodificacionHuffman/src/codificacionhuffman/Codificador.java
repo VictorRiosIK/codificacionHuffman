@@ -68,42 +68,20 @@ public class Codificador {
         
         JOptionPane.showMessageDialog(null,"\t\t"+ "A continuación se le pedira que elija el archivo codigoComprimido.txt a descomprimir");
         lectorArchivo.obtenerFichero();
-        //texto2=lectorArchivo.obtieneTexto();
         pathKey2=lectorArchivo.getPathArchivo();
         
         //TRAER LOS DATOS
         //2 listas que vaa  ser una de caracter y otra de binario asociado a ese caracter
-        //traer el texto binario completo
-        //crear objeto descompresor en el constuctor(lista letras, lista binarios, el textoCompleto)
-        //System.out.println("LONGITUD DE DIVISIONES: " + Integer.parseInt(longitud));
+        //traer el pathKey1 y el pathKey2 para descomprimir
+       
         this.descompresor=new Descompresor(pathKey1,pathKey2);
     }
     public void separarCaracteres(String texto){
         
         System.out.println("LLAVE 2 " + texto);
-        
-        /*letras.add(texto.charAt(0));
-        for (int i = 2; i < texto.length()-1; i++) {
-            String aux="";
-            aux=texto.substring(i,i+longitud);
-            binarios.add(aux);
-            try{
-                letras.add(texto.charAt(i+longitud));
-            }catch(Exception e){
-                
-            }
-            i=i+(longitud+1);
-        }
-        System.out.println("LISTAS");
-        for (int i = 0; i < letras.size(); i++) {
-            try{
-                System.out.println("Letra: "+ letras.get(i)+" BINARIO ASOCIADO: " + binarios.get(i));
-            }catch(Exception e){
-                
-            }
-        }*/
     }
     
+    //Calculamos entropia del mensaje entrante
     public void calculaProbabilidadLetras(String textoOriginal){
         float aux=0;
         double auxEntropia=0,aux2=0;
@@ -135,7 +113,6 @@ public class Codificador {
         letras.addAll(hashSet);//eliminamos repetidos de la lista letras
         
         obtenerRepeticiones();
-        //imprimirListasYRepeticiones(); metodo para imprimir las listas
     }
     
     public void obtenerRepeticiones(){//aqui llenamos las listas con letras y repeticiones

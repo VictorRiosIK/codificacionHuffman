@@ -28,35 +28,8 @@ public class CodificacionHuffman {
        PanelInicio panel=new PanelInicio();
        panel.setVisible(true);
        panel.setLocationRelativeTo(null);
-       
-    	   System.out.println("Victor");
-    	   System.out.println("BBBBB");
-    	
     	
     }
     
 }
 
-
-
-/*String palabra="00110111";
-int entero=1831234123;
-String p=String.valueOf(entero);
-System.out.println(p);
-byte[] bytes = ByteBuffer.allocate(4).putInt(entero).array();
-
-String cadena= new String(bytes,Charset.forName("UTF-8"));
-System.out.println(palabra);
-System.out.println(cadena);
-
-try {
-       FileOutputStream fos = new FileOutputStream("d:/prueba.txt");
-       Writer out = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
-       out.write(cadena);
-       out.close();
-    } 
-    catch (IOException e) {
-       e.printStackTrace();
-    }
-
- }*/

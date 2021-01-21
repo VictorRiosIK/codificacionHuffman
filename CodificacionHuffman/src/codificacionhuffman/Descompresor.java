@@ -31,37 +31,12 @@ public class Descompresor {
             this.longitud=longitud;
             fichero=new Fichero();
             fichero.abrirAmbosFicherosDesompresion(pathKey1, pathKey2);
-           // descomprimir();
-            
-     // fichero=new Fichero("descomprimir");
+         
         }
         Descompresor(){
 
         }
-        
-        
-        
-   /* public void agregarAListas(String binario,String letra){
-        try{
-            letras.add(binario.toString());
-            binariosAsociados.add(letra.toString());
-        }catch(Exception e){
-            System.out.println(""+e.getMessage());
-        }
-    }*/
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
+     
     public void imprimeListas(){
         for (int i = 0; i < letras.size(); i++) {
             System.out.println("Letra:"+letras.get(i)+", Binario:"+binariosAsociados.get(i));
@@ -70,12 +45,6 @@ public class Descompresor {
     
    public void descomprimir() throws InterruptedException {
     	String aux="";
-    	
-    	  /*System.out.println("" + letras.size() + " lll " + binariosAsociados.size());
-    	  for (int i = 0; i < letras.size(); i++) {
-            System.out.println("Letra:"+letras.get(i)+", Binario:"+binariosAsociados.get(i));
-        }*/
-    	  System.out.println("LONG"+longitud);
             for(int i=0;i<binario.length()-1;i+=longitud) {
     		System.out.println("I:"+i);
                 aux=binario.substring(i,i+longitud);
@@ -84,14 +53,9 @@ public class Descompresor {
                     if(binariosAsociados.get(j).equalsIgnoreCase(aux)){
                         Thread.sleep(500);
                         mensaje+=letras.get(j);
-                        System.out.println("Binarioaux: " + aux + "igual a: " + binariosAsociados.get(j).toString() + " LETRA"+ letras.get(j));
+                        
                     }
-				/*if(aux.equals(binariosAsociados.get(j).toString())) {
-					//mensaje=mensaje+letras.get(j);
-                                    System.out.println("Binarioaux: " + aux + "igual a: " + binariosAsociados.get(j).toString() + " LETRA"+ letras.get(j));
-                                     
-				}*/
-			
+	
                 }
                 aux="";	
             }
