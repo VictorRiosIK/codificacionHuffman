@@ -22,7 +22,9 @@ public class Codificador {
     private Lector lectorArchivo;
     private Compresor compresor;
     private String texto;
+    private String texto2;
     private ArrayList<Character> letras;//lista para las letras
+    private ArrayList<String> binarios;
     private ArrayList<Integer> repeticiones;//lista para guardar las repticiones de cada letra de texto
     private ArrayList<Float> probabilidad;
     private Set<Character> hashSet;
@@ -32,11 +34,13 @@ public class Codificador {
            this.escritorArchivo=new Escritor();
            this.lectorArchivo=new Lector();
            this.fichero=new Fichero();
-           this.descompresor=new Descompresor();
+          
            letras=new ArrayList<Character>();
+           binarios=new ArrayList<String>();
            repeticiones=new ArrayList<Integer>();
            probabilidad=new ArrayList<Float>();
            this.texto="";
+            this.texto2="";
     }
     
     //aqui lee el archivo de texto que contiene el binario
@@ -52,13 +56,45 @@ public class Codificador {
     
     
     public void calcularDescompresor() throws IOException, InterruptedException{
+        String longitud;
         JOptionPane.showMessageDialog(null,"\t\tBIENVENIDO AL DESCOMPRESOR DE TEXTO MEDIANTE EL CODIGO DE HUFFMAN\n"
-                + "A continuación se le pedira que elija el archivo .txt a codificar");
+                + "A continuación se le pedira que elija el archivo .txt a descomprimir");
         lectorArchivo.obtenerFichero();
         texto=lectorArchivo.obtieneTexto();//texto obtenido del archivo
         System.out.println("Binario de archivo: "+texto);
+        //
+        lectorArchivo.obtenerFichero();
+        texto2=lectorArchivo.obtieneTexto();
+         System.out.println("arreglos: "+texto2);
+        //TRAER LOS DATOS
+        //2 listas que vaa  ser una de caracter y otra de binario asociado a ese caracter
+        //traer el texto binario completo
+        //crear objeto descompresor en el constuctor(lista letras, lista binarios, el textoCompleto)
+        separarCaracteres(texto2);
+        longitud=String.valueOf(texto.charAt(texto.length()-1));
        
+        //System.out.println("LONGITUD DE DIVISIONES: " + Integer.parseInt(longitud));
+        this.descompresor=new Descompresor(texto,letras,binarios,Integer.parseInt(longitud));
     }
+    public void separarCaracteres(String texto){
+        letras.add(texto.charAt(0));
+        for (int i = 2; i < texto.length()-1; i++) {
+            String aux="";
+            aux=texto.substring(i,i+5);
+            binarios.add(aux);
+            try{
+                letras.add(texto.charAt(i+5));
+            }catch(Exception e){
+                
+            }
+            i=i+6;
+        }
+        System.out.println("LISTAS");
+        for (int i = 0; i < letras.size(); i++) {
+            System.out.println("Letra: "+ letras.get(i)+" BINARIO ASOCIADO: " + binarios.get(i));
+        }
+    }
+    
     public void calculaProbabilidadLetras(String textoOriginal){
         float aux=0;
         double auxEntropia=0,aux2=0;

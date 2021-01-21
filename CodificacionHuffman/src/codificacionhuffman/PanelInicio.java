@@ -84,7 +84,15 @@ public class PanelInicio extends JFrame {
                     } 
                 break;
                 case 1:
-                   //codificadorHoffman.calcularDescompresor();
+            {
+                try {
+                    codificadorHoffman.calcularDescompresor();
+                } catch (IOException ex) {
+                    Logger.getLogger(PanelInicio.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(PanelInicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
                 
             }
     
